@@ -5,7 +5,7 @@ function create2DArray(columns: number, rows: number) {
     arr[i] = new Array(rows);
 
     for (let j = 0; j < rows; j++) {
-      arr[i][j] = 0;
+      arr[i][j] = Math.floor(Math.random() * 2);
     }
   }
   return arr;

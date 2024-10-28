@@ -1,8 +1,8 @@
 import countNeighbours from "./countNeighbours";
-import create2DArray from "./create2DArray";
+import createEmpty2DArray from "./createEmpty2DArray";
 
 function rules(array: number[][]) {
-  const newArr = create2DArray(30, 30);
+  const newArr = createEmpty2DArray(30, 30);
 
   for (let i = 1; i < array.length - 1; i++) {
     for (let j = 1; j < array[i].length - 1; j++) {

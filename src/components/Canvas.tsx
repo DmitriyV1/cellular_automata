@@ -1,20 +1,18 @@
-import { useEffect, useRef, useState } from "react";
-import create2DArray from "../functions/create2DArray";
+import { useEffect, useRef } from "react";
+
 import rules from "../functions/rules";
 
-const Canvas = ({
-  parameters,
-  array,
-}: {
+type TProps = {
   array: number[][];
   parameters: { speed: number; active: boolean };
-}) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  setArray: (newArray: number[][]) => void;
+};
 
+const Canvas = ({ parameters, array, setArray }: TProps) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { speed, active } = parameters;
 
   useEffect(() => {
-    // Дефолтный эффект, срабатывающий в самом начале. Отрисовывает первичные данные.
     if (canvasRef.current === null) return;
 
     const canvas = canvasRef.current;
@@ -23,9 +21,6 @@ const Canvas = ({
 
     for (let i = 0; i < array.length; i++) {
       for (let j = 0; j < array[i].length; j++) {
-        array[i][j] = Math.floor(Math.random() * 2);
-
-        // Задержка отрисовки
         if (!active) return;
 
         if (array[i][j] !== 0) {
@@ -39,8 +34,12 @@ const Canvas = ({
       }
     }
 
-    // Следующая итерация
-  }, [array]);
+    const interval = setInterval(() => {
+      setArray(rules(array));
+    }, speed);
+
+    return () => clearInterval(interval);
+  }, [array, speed, active, setArray]);
 
   return <canvas className="canvas" ref={canvasRef} width={900} height={900} />;
 };
