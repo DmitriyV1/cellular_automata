@@ -6,10 +6,12 @@ type TProps = {
   array: number[][];
   parameters: { speed: number; active: boolean };
   setArray: (newArray: number[][]) => void;
+  setIteration: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const Canvas = ({ parameters, array, setArray }: TProps) => {
+const Canvas = ({ parameters, array, setArray, setIteration }: TProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
   const { speed, active } = parameters;
 
   useEffect(() => {
@@ -36,12 +38,17 @@ const Canvas = ({ parameters, array, setArray }: TProps) => {
 
     const interval = setInterval(() => {
       setArray(rules(array));
+      setIteration((prev) => prev + 1);
     }, speed);
 
     return () => clearInterval(interval);
-  }, [array, speed, active, setArray]);
+  }, [array, speed, active, setArray, setIteration]);
 
-  return <canvas className="canvas" ref={canvasRef} width={900} height={900} />;
+  return (
+    <>
+      <canvas className="canvas" ref={canvasRef} width={900} height={900} />
+    </>
+  );
 };
 
 export default Canvas;
