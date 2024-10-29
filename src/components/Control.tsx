@@ -11,6 +11,8 @@ type TProps = {
     speed: number;
     active: boolean;
   }) => void;
+  // во-первых, лучше использовать типы не через точку, а отдельно импортировать из react
+  // во-вторых, сеттеры стейта лучше заворачивать в функцию, мы об этом уже говорили
   setIteration: React.Dispatch<React.SetStateAction<number>>;
 };
 

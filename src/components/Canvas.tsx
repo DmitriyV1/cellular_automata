@@ -6,6 +6,8 @@ type TProps = {
   array: number[][];
   parameters: { speed: number; active: boolean };
   setArray: (newArray: number[][]) => void;
+  // во-первых, лучше использовать типы не через точку, а отдельно импортировать из react
+  // во-вторых, сеттеры стейта лучше заворачивать в функцию, мы об этом уже говорили
   setIteration: React.Dispatch<React.SetStateAction<number>>;
 };
 

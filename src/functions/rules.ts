@@ -8,6 +8,7 @@ function rules(array: number[][]) {
     for (let j = 1; j < array[i].length - 1; j++) {
       const neighbours = countNeighbours(i, j, array);
 
+      // для чего ты присваиваешь старое значение клетки, если потом независимо от условий будешь его менять?
       newArr[i][j] = array[i][j];
 
       if (
